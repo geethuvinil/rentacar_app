@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
 loginDetails(text: "Enter your email id",controllerName: _textEditingEmailController,type: TextInputType.emailAddress,iconName:Icons.email_rounded),
 loginDetails(text: "Enter your password",controllerName: _textEditingPasswordController,type: TextInputType.visiblePassword,iconName:Icons.password ),
      SizedBox(
-                height: 30,
+                height: 40,
                ),
         ElevatedButton(
                 style: ElevatedButton.styleFrom(
