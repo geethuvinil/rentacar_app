@@ -88,8 +88,11 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             reminderTile(),
+            SizedBox(
+              height: 10,
+            ),
             favoritesTile(),
-            ],
+          ],
         ),
       ),
     );
@@ -126,14 +129,98 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-favoritesTile(){
-  return Column(
-    children: [
-      Text("My Favorites"),
 
-    ],
-  );
-}
+  favoritesTile() {
+    return Column(
+      children: [
+        Text(
+          "My Favorites",
+          style: TextStyle(
+            fontSize: 18,
+          ),
+        ),
+        ImageSlideshow(
+            autoPlayInterval: 2,
+            height: 360,
+            //height: MediaQuery.of(context).size.height,
+            children: [
+              slideShowDetails(
+                imageName: "assets/car_images/honda_civic.jpg",
+                name: "Honda Civic",
+                model: "2018",
+                fuelType: "Petrol",
+                colorName: "White",
+                priceValue: "Rs.1100 per day",
+              ),
+                slideShowDetails(
+                imageName: "assets/car_images/maruti_baleno.jpg",
+                name: "Maruti Suzuki Baleno",
+                model: "2020",
+                fuelType: "Diesel",
+                colorName: "Blue",
+                priceValue: "Rs.1000 per day",
+              ),
+              slideShowDetails(
+                imageName: "assets/car_images/nissan_patrol.jpg",
+                name: "Nissan Patrol",
+                model: "2022",
+                fuelType: "Diesel",
+                colorName: "Gold",
+                priceValue: "Rs.1800 per day",
+              ),
+                
+            ])
+      ],
+    );
+  }
+
+  slideShowDetails(
+      {String? imageName,
+      String? name,
+      String? model,
+      String? colorName,
+      String? fuelType,
+      String? priceValue,
+      Function()? moreDetailsMove}) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      decoration: BoxDecoration(border: Border.all(color: Colors.deepPurple)),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 10,
+          ),
+          Image(
+            image: AssetImage("$imageName"),
+            fit: BoxFit.fill,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Text(
+              "Name: ${name!}",
+              style: TextStyle(fontWeight: FontWeight.w700),
+            ),
+          ),
+          Text("Model: ${model!}"),
+          Text("Fuel Type: ${fuelType!}"),
+          Text("Color: ${colorName!}"),
+          Text(
+            "Price: ${priceValue!}",
+            style: TextStyle(color: Colors.red),
+          ),
+          TextButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => moreDetailsMove!(),
+                    ));
+              },
+              child: Text("More details"))
+        ],
+      ),
+    );
+  }
 
   drawerListTile({String? title, IconData? iconName, Function()? onTapMove}) {
     return ListTile(
