@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:rent_a_car/screens/contact_screen.dart';
 import 'package:rent_a_car/screens/my_account_screen.dart';
+import 'package:rent_a_car/screens/rents_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,7 +24,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 Icons.favorite,
                 size: 32,
               )),
-          IconButton(onPressed: () {}, icon: Icon(Icons.search, size: 32)),
+          IconButton(onPressed: () {
+            Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RentsScreen(),
+                    ));
+          }, icon: Icon(Icons.car_rental, size: 32)),
+          IconButton(onPressed: () {
+          
+          }, icon: Icon(Icons.search, size: 32)),
           IconButton(
               onPressed: () {
                 Navigator.push(
@@ -61,6 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 iconName: Icons.notifications_active,
               ),
               drawerListTile(
+                title: "Rents",
+                iconName: Icons.car_rental_rounded,
+                onTapMove: () => RentsScreen(),
+              ),
+              drawerListTile(
                 title: "Payments",
                 iconName: Icons.account_balance_rounded,
               ),
@@ -72,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
               drawerListTile(
                 title: "Contact Us",
                 iconName: Icons.support_agent_rounded,
+                onTapMove: () => ContactScreen()
               ),
               drawerListTile(
                   title: "Logout",
@@ -92,6 +109,13 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             favoritesTile(),
+            SizedBox(
+              height: 10,
+            ),
+            availableTile(),
+             SizedBox(
+              height: 10,
+            ),
           ],
         ),
       ),
@@ -120,11 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
             "days remaining\nto enjoy your car",
             style: TextStyle(color: Colors.grey.shade800, fontSize: 16),
           ),
-          Icon(
-            Icons.car_rental_rounded,
-            color: Colors.deepPurple,
-            size: 40,
-          )
+          Image(image: AssetImage("assets/icons/enjoy_car.jpg"),height: 80,)
         ],
       ),
     );
@@ -140,19 +160,21 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         ImageSlideshow(
-            autoPlayInterval: 2,
-            height: 360,
-            //height: MediaQuery.of(context).size.height,
+     
+          isLoop: true,
+          autoPlayInterval: 2000,
+            initialPage: 0,
+            height: MediaQuery.of(context).size.height - 400,
             children: [
               slideShowDetails(
                 imageName: "assets/car_images/honda_civic.jpg",
                 name: "Honda Civic",
                 model: "2018",
                 fuelType: "Petrol",
-                colorName: "White",
+                colorName: "Black",
                 priceValue: "Rs.1100 per day",
               ),
-                slideShowDetails(
+              slideShowDetails(
                 imageName: "assets/car_images/maruti_baleno.jpg",
                 name: "Maruti Suzuki Baleno",
                 model: "2020",
@@ -168,12 +190,68 @@ class _HomeScreenState extends State<HomeScreen> {
                 colorName: "Gold",
                 priceValue: "Rs.1800 per day",
               ),
-                
+               slideShowDetails(
+                imageName: "assets/car_images/ford_mustang.jpg",
+                name: "Ford Mustang",
+                model: "2022",
+                fuelType: "Diesel",
+                colorName: "Red",
+                priceValue: "Rs.4500 per day",
+              ),
             ])
       ],
     );
   }
 
+availableTile(){
+  return Column(
+    children: [
+      Text("Now Available",
+       style: TextStyle(
+            fontSize: 18,
+          ),),
+         ImageSlideshow(
+             isLoop: true,
+          autoPlayInterval: 2000,
+            initialPage: 0,
+            height: MediaQuery.of(context).size.height - 400,
+          children: [
+slideShowDetails(
+                imageName: "assets/car_images/bmw_i7.jpg",
+                name: "BMW series 7",
+                model: "2022",
+                fuelType: "Diesel",
+                colorName: "Black",
+                priceValue: "Rs.10000 per day",
+              ),
+              slideShowDetails(
+                imageName: "assets/car_images/toyota_innova.jpg",
+                name: "Toyota Innova",
+                model: "2019",
+                fuelType: "Petrol",
+                colorName: "White",
+                priceValue: "Rs.3000 per day",
+              ),
+              slideShowDetails(
+                imageName: "assets/car_images/chevrolet_impala.jpg",
+                name: "Chevrolet Impala",
+                model: "2021",
+                fuelType: "Diesel",
+                colorName: "Black",
+                priceValue: "Rs.8500 per day",
+              ),
+                slideShowDetails(
+                imageName: "assets/car_images/hyundai_elentra.jpg",
+                name: "Hyundai Elentra",
+                model: "2020",
+                fuelType: "Petrol",
+                colorName: "Blue",
+                priceValue: "Rs.4500 per day",
+              ),
+         ])
+    ],
+  );
+}
   slideShowDetails(
       {String? imageName,
       String? name,
@@ -182,42 +260,45 @@ class _HomeScreenState extends State<HomeScreen> {
       String? fuelType,
       String? priceValue,
       Function()? moreDetailsMove}) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(border: Border.all(color: Colors.deepPurple)),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 10,
-          ),
-          Image(
-            image: AssetImage("$imageName"),
-            fit: BoxFit.fill,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Text(
-              "Name: ${name!}",
-              style: TextStyle(fontWeight: FontWeight.w700),
+    return Padding(
+      padding: const EdgeInsets.only(top: 10,left: 15,right: 10,bottom: 10),
+      child: Card(
+        elevation: 5,
+        color: Colors.white,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 10,
             ),
-          ),
-          Text("Model: ${model!}"),
-          Text("Fuel Type: ${fuelType!}"),
-          Text("Color: ${colorName!}"),
-          Text(
-            "Price: ${priceValue!}",
-            style: TextStyle(color: Colors.red),
-          ),
-          TextButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => moreDetailsMove!(),
-                    ));
-              },
-              child: Text("More details"))
-        ],
+            Image(
+              image: AssetImage("$imageName"),
+              fit: BoxFit.fill,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Text(
+                "Name: ${name!}",
+                style: TextStyle(fontWeight: FontWeight.w700),
+              ),
+            ),
+            Text("Model: ${model!}"),
+            Text("Fuel Type: ${fuelType!}"),
+            Text("Color: ${colorName!}"),
+            Text(
+              "Price: ${priceValue!}",
+              style: TextStyle(color: Colors.red),
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => moreDetailsMove!(),
+                      ));
+                },
+                child: Text("More details"))
+          ],
+        ),
       ),
     );
   }
@@ -269,4 +350,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+
 }
