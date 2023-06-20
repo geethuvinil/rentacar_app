@@ -12,6 +12,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+           elevation: 2,
         title: Text("Account"),
       ),
       body: SingleChildScrollView(

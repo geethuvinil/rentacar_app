@@ -1,8 +1,13 @@
+import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:rent_a_car/common_widgets/image_slideshow.dart';
 import 'package:rent_a_car/screens/contact_screen.dart';
+import 'package:rent_a_car/screens/favorites_screen.dart';
 import 'package:rent_a_car/screens/my_account_screen.dart';
+import 'package:rent_a_car/screens/payments_screen.dart';
+import 'package:rent_a_car/screens/reminder_screen.dart';
 import 'package:rent_a_car/screens/rents_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,27 +18,55 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String searchValue = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: EasySearchBar(
+        searchHintText: "Search",
+        backgroundColor: Colors.white,
+        title: Text(""),
+        onSearch: (value) {
+          setState(() {
+            searchValue = value;
+          });
+          //  if(searchValue.contains("Honda Civic")){
+          //    Navigator.push(
+          //               context,
+          //               MaterialPageRoute(
+          //                 builder: (context) => RentsScreen(),
+          //               ));
+          //  }
+          //  else{
+          //    Navigator.push(
+          //               context,
+          //               MaterialPageRoute(
+          //                 builder: (context) => ContactScreen(),
+          //               ));
+          //  }
+        },
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                   Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FavoritesScreen(),
+                    ));
+              },
               icon: Icon(
                 Icons.favorite,
                 size: 32,
               )),
-          IconButton(onPressed: () {
-            Navigator.push(
+          IconButton(
+              onPressed: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => RentsScreen(),
                     ));
-          }, icon: Icon(Icons.car_rental, size: 32)),
-          IconButton(onPressed: () {
-          
-          }, icon: Icon(Icons.search, size: 32)),
+              },
+              icon: Icon(Icons.car_rental, size: 32)),
           IconButton(
               onPressed: () {
                 Navigator.push(
@@ -66,10 +99,12 @@ class _HomeScreenState extends State<HomeScreen> {
               drawerListTile(
                 title: "Favorites",
                 iconName: Icons.favorite_rounded,
+                onTapMove: () => FavoritesScreen(),
               ),
               drawerListTile(
                 title: "Reminders",
                 iconName: Icons.notifications_active,
+                 onTapMove: () => ReminderScreen(),
               ),
               drawerListTile(
                 title: "Rents",
@@ -79,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
               drawerListTile(
                 title: "Payments",
                 iconName: Icons.account_balance_rounded,
+                  onTapMove: () => PaymentScreen(),
               ),
               drawerListTile(
                 title: "Account",
@@ -86,10 +122,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTapMove: () => MyAccountScreen(),
               ),
               drawerListTile(
-                title: "Contact Us",
-                iconName: Icons.support_agent_rounded,
-                onTapMove: () => ContactScreen()
-              ),
+                  title: "Contact Us",
+                  iconName: Icons.support_agent_rounded,
+                  onTapMove: () => ContactScreen()),
               drawerListTile(
                   title: "Logout",
                   iconName: Icons.logout_rounded,
@@ -98,208 +133,183 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            reminderTile(),
-            SizedBox(
-              height: 10,
-            ),
-            favoritesTile(),
-            SizedBox(
-              height: 10,
-            ),
-            availableTile(),
-             SizedBox(
-              height: 10,
-            ),
-          ],
+      body: WillPopScope(
+        onWillPop: logoutDialog,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              reminderTile(),
+              SizedBox(
+                height: 10,
+              ),
+              favoritesTile(),
+              SizedBox(
+                height: 10,
+              ),
+              availableTile(),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   reminderTile() {
-    return Container(
-      margin: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, style: BorderStyle.solid)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 10, right: 8),
-            child: CircleAvatar(
-              radius: 35,
-              child: Text(
-                "31",
-                style: TextStyle(fontSize: 30),
+    return InkWell(
+      onTap: (){
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ReminderScreen(),
+            ));
+      },
+      child: Container(
+        margin: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.black, style: BorderStyle.solid)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 10, right: 8),
+              child: CircleAvatar(
+                radius: 35,
+                child: Text(
+                  "31",
+                  style: TextStyle(fontSize: 30),
+                ),
               ),
             ),
-          ),
-          Text(
-            "days remaining\nto enjoy your car",
-            style: TextStyle(color: Colors.grey.shade800, fontSize: 16),
-          ),
-          Image(image: AssetImage("assets/icons/enjoy_car.jpg"),height: 80,)
-        ],
+            Text(
+              "days remaining\nto enjoy your car",
+              style: TextStyle(color: Colors.grey.shade800, fontSize: 16),
+            ),
+            Image(
+              image: AssetImage("assets/icons/enjoy_car.jpg"),
+              height: 80,
+            )
+          ],
+        ),
       ),
     );
   }
 
   favoritesTile() {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FavoritesScreen(),
+            ));
+      },
+      child: Column(
+        children: [
+          Text(
+            "My Favorites",
+            style: TextStyle(
+              fontSize: 18,
+            ),
+          ),
+          ImageSlideshow(
+              isLoop: true,
+              autoPlayInterval: 2000,
+              initialPage: 0,
+              height: MediaQuery.of(context).size.height - 400,
+              children: [
+                SlideShowCardWidget(
+                  carImage: "assets/car_images/honda_civic.jpg",
+                  carName: "Honda Civic",
+                  carModel: "2018",
+                  carFuel: "Petrol",
+                  carColor: "Black",
+                  carPrice: "Rs.1100 per day",
+                ),
+                SlideShowCardWidget(
+                  carImage: "assets/car_images/maruti_baleno.jpg",
+                  carName: "Maruti Suzuki Baleno",
+                  carModel: "2020",
+                  carFuel: "Diesel",
+                  carColor: "Blue",
+                  carPrice: "Rs.1000 per day",
+                ),
+                SlideShowCardWidget(
+                  carImage: "assets/car_images/nissan_patrol.jpg",
+                  carName: "Nissan Patrol",
+                  carModel: "2022",
+                  carFuel: "Diesel",
+                  carColor: "Gold",
+                  carPrice: "Rs.1800 per day",
+                ),
+                SlideShowCardWidget(
+                  carImage: "assets/car_images/ford_mustang.jpg",
+                  carName: "Ford Mustang",
+                  carModel: "2022",
+                  carFuel: "Diesel",
+                  carColor: "Red",
+                  carPrice: "Rs.4500 per day",
+                )
+              ])
+        ],
+      ),
+    );
+  }
+
+  availableTile() {
     return Column(
       children: [
         Text(
-          "My Favorites",
+          "Now Available",
           style: TextStyle(
             fontSize: 18,
           ),
         ),
         ImageSlideshow(
-     
-          isLoop: true,
-          autoPlayInterval: 2000,
+            isLoop: true,
+            autoPlayInterval: 2000,
             initialPage: 0,
             height: MediaQuery.of(context).size.height - 400,
             children: [
-              slideShowDetails(
-                imageName: "assets/car_images/honda_civic.jpg",
-                name: "Honda Civic",
-                model: "2018",
-                fuelType: "Petrol",
-                colorName: "Black",
-                priceValue: "Rs.1100 per day",
+              SlideShowCardWidget(
+                carImage: "assets/car_images/bmw_i7.jpg",
+                carName: "BMW series 7",
+                carModel: "2022",
+                carFuel: "Diesel",
+                carColor: "Black",
+                carPrice: "Rs.10000 per day",
               ),
-              slideShowDetails(
-                imageName: "assets/car_images/maruti_baleno.jpg",
-                name: "Maruti Suzuki Baleno",
-                model: "2020",
-                fuelType: "Diesel",
-                colorName: "Blue",
-                priceValue: "Rs.1000 per day",
+              SlideShowCardWidget(
+                carImage: "assets/car_images/toyota_innova.jpg",
+                carName: "Toyota Innova",
+                carModel: "2019",
+                carFuel: "Petrol",
+                carColor: "White",
+                carPrice: "Rs.3000 per day",
               ),
-              slideShowDetails(
-                imageName: "assets/car_images/nissan_patrol.jpg",
-                name: "Nissan Patrol",
-                model: "2022",
-                fuelType: "Diesel",
-                colorName: "Gold",
-                priceValue: "Rs.1800 per day",
+              SlideShowCardWidget(
+                carImage: "assets/car_images/chevrolet_impala.jpg",
+                carName: "Chevrolet Impala",
+                carModel: "2021",
+                carFuel: "Diesel",
+                carColor: "Black",
+                carPrice: "Rs.8500 per day",
               ),
-               slideShowDetails(
-                imageName: "assets/car_images/ford_mustang.jpg",
-                name: "Ford Mustang",
-                model: "2022",
-                fuelType: "Diesel",
-                colorName: "Red",
-                priceValue: "Rs.4500 per day",
-              ),
+              SlideShowCardWidget(
+                carImage: "assets/car_images/hyundai_elentra.jpg",
+                carName: "Hyundai Elentra",
+                carModel: "2020",
+                carFuel: "Petrol",
+                carColor: "Blue",
+                carPrice: "Rs.4500 per day",
+              )
             ])
       ],
-    );
-  }
-
-availableTile(){
-  return Column(
-    children: [
-      Text("Now Available",
-       style: TextStyle(
-            fontSize: 18,
-          ),),
-         ImageSlideshow(
-             isLoop: true,
-          autoPlayInterval: 2000,
-            initialPage: 0,
-            height: MediaQuery.of(context).size.height - 400,
-          children: [
-slideShowDetails(
-                imageName: "assets/car_images/bmw_i7.jpg",
-                name: "BMW series 7",
-                model: "2022",
-                fuelType: "Diesel",
-                colorName: "Black",
-                priceValue: "Rs.10000 per day",
-              ),
-              slideShowDetails(
-                imageName: "assets/car_images/toyota_innova.jpg",
-                name: "Toyota Innova",
-                model: "2019",
-                fuelType: "Petrol",
-                colorName: "White",
-                priceValue: "Rs.3000 per day",
-              ),
-              slideShowDetails(
-                imageName: "assets/car_images/chevrolet_impala.jpg",
-                name: "Chevrolet Impala",
-                model: "2021",
-                fuelType: "Diesel",
-                colorName: "Black",
-                priceValue: "Rs.8500 per day",
-              ),
-                slideShowDetails(
-                imageName: "assets/car_images/hyundai_elentra.jpg",
-                name: "Hyundai Elentra",
-                model: "2020",
-                fuelType: "Petrol",
-                colorName: "Blue",
-                priceValue: "Rs.4500 per day",
-              ),
-         ])
-    ],
-  );
-}
-  slideShowDetails(
-      {String? imageName,
-      String? name,
-      String? model,
-      String? colorName,
-      String? fuelType,
-      String? priceValue,
-      Function()? moreDetailsMove}) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10,left: 15,right: 10,bottom: 10),
-      child: Card(
-        elevation: 5,
-        color: Colors.white,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 10,
-            ),
-            Image(
-              image: AssetImage("$imageName"),
-              fit: BoxFit.fill,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Text(
-                "Name: ${name!}",
-                style: TextStyle(fontWeight: FontWeight.w700),
-              ),
-            ),
-            Text("Model: ${model!}"),
-            Text("Fuel Type: ${fuelType!}"),
-            Text("Color: ${colorName!}"),
-            Text(
-              "Price: ${priceValue!}",
-              style: TextStyle(color: Colors.red),
-            ),
-            TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => moreDetailsMove!(),
-                      ));
-                },
-                child: Text("More details"))
-          ],
-        ),
-      ),
     );
   }
 
@@ -317,39 +327,40 @@ slideShowDetails(
         });
   }
 
-  logoutDialog() {
-    return Dialog(
-      child: Container(
-        height: 150,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                "Do you want to really exit from the app?",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+  Future<bool> logoutDialog() async {
+    return await showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        child: Container(
+          height: 150,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  "Do you want to really exit from the app?",
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+                ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("No")),
-                ElevatedButton(
-                    onPressed: () {
-                      SystemNavigator.pop();
-                    },
-                    child: Text("Yes"))
-              ],
-            )
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text("No")),
+                  ElevatedButton(
+                      onPressed: () {
+                        SystemNavigator.pop();
+                      },
+                      child: Text("Yes"))
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
-
-
 }

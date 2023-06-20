@@ -13,6 +13,7 @@ class _RentsScreenState extends State<RentsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 2,
         title: Text("Rent Details"),
       ),
       body: SingleChildScrollView(

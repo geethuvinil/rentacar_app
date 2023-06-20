@@ -12,6 +12,7 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+           elevation: 2,
         title: Text("Contact Us"),
       ),
       body: SingleChildScrollView(
@@ -39,19 +40,22 @@ class _ContactScreenState extends State<ContactScreen> {
                     data: "abvcdefgh\n@gmail.com",
                     iconName: Icons.email,
                     colorName: Colors.teal),
-                     gridCard(
-                    data: "xyz Street\nkochi\nKerala",
+                gridCard(
+                    data: '''xyz Street
+                             Kochi
+                             Kerala'''
+                             ,
                     iconName: Icons.location_on,
                     colorName: Colors.green.shade700),
-                     gridCard(
+                gridCard(
                     data: "FAQ",
                     iconName: Icons.help,
                     colorName: Colors.orangeAccent.shade400),
-                     gridCard(
+                gridCard(
                     data: "Terms&\nConditions",
                     iconName: Icons.menu_book_rounded,
                     colorName: Colors.red.shade600),
-                     gridCard(
+                gridCard(
                     data: "Privacy policy",
                     iconName: Icons.privacy_tip_rounded,
                     colorName: Colors.blue),
@@ -91,8 +95,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     fontWeight: FontWeight.w800,
                     fontSize: 17),
                 textAlign: TextAlign.center,
-                      
-                       maxLines: 4,
+                maxLines: 4,
               ),
             )
           ],
