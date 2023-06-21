@@ -17,7 +17,20 @@ class _ReminderScreenState extends State<ReminderScreen> {
         title: Text("Reminder"),
       ),
       body: SingleChildScrollView(child: Column(children: [
-Lottie.network("https://assets9.lottiefiles.com/packages/lf20_gMlW30ngjC.json")
+Lottie.network("https://assets9.lottiefiles.com/packages/lf20_gMlW30ngjC.json",height: 200,width: MediaQuery.of(context).size.width),
+SizedBox(
+  height: 30,
+),
+Text("xx days remaining to enjoy your car",
+style: TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 19,
+  color: Colors.deepPurple
+),),
+SizedBox(height: 10,),
+reminderWidget(content: "Date of purchase : 22/01/2023"),
+reminderWidget(content: "Duartion : 10 months "),
+reminderWidget(content: "Date of return : 22/11/2023")
       ],),),
     );
   }

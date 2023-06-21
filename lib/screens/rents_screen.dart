@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:rent_a_car/screens/car_details_screen.dart';
 
 class RentsScreen extends StatefulWidget {
   const RentsScreen({super.key});
@@ -99,7 +100,7 @@ class _RentsScreenState extends State<RentsScreen> {
       String? colorName,
       String? fuelType,
       String? priceValue,
-      Function()? moreDetailsMove,
+     
       String? purchasedOn,
       String? deliveredOn}) {
     return Padding(
@@ -137,7 +138,7 @@ class _RentsScreenState extends State<RentsScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => moreDetailsMove!(),
+                        builder: (context) => CarDetailsScreen(),
                       ));
                 },
                 child: Text("More details"))
