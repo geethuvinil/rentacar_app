@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:get/get.dart';
 import 'package:rent_a_car/screens/car_details_screen.dart';
 
 class RentsScreen extends StatefulWidget {
@@ -135,11 +136,7 @@ class _RentsScreenState extends State<RentsScreen> {
             ),
             TextButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CarDetailsScreen(),
-                      ));
+                      Get.to(() => CarDetailsScreen());
                 },
                 child: Text("More details"))
           ],

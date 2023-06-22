@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rent_a_car/screens/main_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           height: 20,
         ),
       ElevatedButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MainScreen(),));
+   Get.to(() => MainScreen());
       }, child: Text("I am a Buyer"))
       
       ],),

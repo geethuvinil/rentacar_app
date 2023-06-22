@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rent_a_car/screens/car_details_screen.dart';
 
 
@@ -49,18 +50,14 @@ class _SlideShowCardWidgetState extends State<SlideShowCardWidget> {
             ),
             TextButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CarDetailsScreen(
-                          carImage: widget.carImage,
+                       Get.to(() => CarDetailsScreen(
+                        carImage: widget.carImage,
                           carColor: widget.carColor,
                           carFuel: widget.carFuel,
                           carModel: widget.carModel,
                           carName: widget.carName,
                           carPrice: widget.carPrice,
-                        ),
-                      ));
+                       ));
                 },
                 child: Text("More details"))
           ],

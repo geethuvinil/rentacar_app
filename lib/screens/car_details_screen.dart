@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rent_a_car/common_widgets/common_dialog_box.dart';
+import 'package:get/get.dart';
 import 'package:rent_a_car/screens/home_screen.dart';
+import 'package:rent_a_car/screens/purchase_screen.dart';
 import 'package:rent_a_car/screens/return_screen.dart';
 
 class CarDetailsScreen extends StatefulWidget {
@@ -39,15 +40,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  // if not available
-                  //dialogBox();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CommonDialogBox(
-                          title: "Do you really want to purchase this car",
-                        ),
-                      ));
+                 Get.to(() => PurchaseScreen());
                 },
                 child: Text("Purchase")),
             SizedBox(
@@ -55,11 +48,8 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ReturncarScreen()
-                      ));
+               
+                 Get.to(() => ReturncarScreen());
                 },
                 child: Text("Return")),
           ],

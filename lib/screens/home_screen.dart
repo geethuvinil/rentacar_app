@@ -2,7 +2,9 @@ import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:get/get.dart';
 import 'package:rent_a_car/common_widgets/image_slideshow.dart';
+import 'package:rent_a_car/screens/car_details_screen.dart';
 import 'package:rent_a_car/screens/contact_screen.dart';
 import 'package:rent_a_car/screens/favorites_screen.dart';
 import 'package:rent_a_car/screens/my_account_screen.dart';
@@ -48,11 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
               onPressed: () {
-                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => FavoritesScreen(),
-                    ));
+              
+                     Get.to(() => FavoritesScreen());
               },
               icon: Icon(
                 Icons.favorite,
@@ -60,20 +59,12 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
           IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => RentsScreen(),
-                    ));
+                 Get.to(() => RentsScreen());
               },
               icon: Icon(Icons.car_rental, size: 32)),
           IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MyAccountScreen(),
-                    ));
+            Get.to(() => MyAccountScreen());
               },
               icon: Icon(Icons.person, size: 32))
         ],
@@ -163,11 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
   reminderTile() {
     return InkWell(
       onTap: (){
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ReminderScreen(),
-            ));
+        Get.to(() => ReminderScreen());
       },
       child: Container(
         margin: EdgeInsets.all(12),
@@ -203,11 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
   favoritesTile() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => FavoritesScreen(),
-            ));
+      Get.to(() => FavoritesScreen());
       },
       child: Column(
         children: [
@@ -321,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         leading: Icon(iconName),
         onTap: () {
-          Navigator.pop(context);
+         Get.back();
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => onTapMove!()));
         });
@@ -347,7 +330,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                       Get.back();
                       },
                       child: Text("No")),
                   ElevatedButton(

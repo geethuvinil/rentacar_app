@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rent_a_car/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ loginDetails(text: "Enter your password",controllerName: _textEditingPasswordCon
                   backgroundColor: Colors.deepPurple
                 ),
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(),));
+                    Get.to(() => HomeScreen());
                 }, child: Text("Login",style: TextStyle(color: Colors.white),))
        
         ],),

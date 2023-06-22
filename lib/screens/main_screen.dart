@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rent_a_car/screens/login_screen.dart';
 import 'package:rent_a_car/screens/signup_screen.dart';
 
@@ -34,13 +35,13 @@ class _MainScreenState extends State<MainScreen> {
           height: 20,
         ),
       ElevatedButton(onPressed: (){
-         Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+           Get.to(() => LoginScreen());
       }, child: Text("Login")),
       SizedBox(
           height: 20,
         ),
       ElevatedButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => SignUpScreen(),));
+              Get.to(() => SignUpScreen());
 }, child: Text("SignUp"))
 
         ],
