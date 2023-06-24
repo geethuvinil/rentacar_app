@@ -41,9 +41,7 @@ class _ContactScreenState extends State<ContactScreen> {
                     iconName: Icons.email,
                     colorName: Colors.teal),
                 gridCard(
-                    data: '''xyz Street
-                             Kochi
-                             Kerala'''
+                    data: "xyz Street Kochi Kerala"
                              ,
                     iconName: Icons.location_on,
                     colorName: Colors.green.shade700),
@@ -86,16 +84,15 @@ class _ContactScreenState extends State<ContactScreen> {
             SizedBox(
               height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
+            Expanded(
               child: Text(
                 data!,
                 style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
                     fontSize: 17),
-                textAlign: TextAlign.center,
-                maxLines: 4,
+                 textAlign: TextAlign.center,
+                
               ),
             )
           ],

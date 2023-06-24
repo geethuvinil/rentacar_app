@@ -40,7 +40,7 @@ class _CarDetailsScreenState extends State<CarDetailsScreen> {
             ),
             ElevatedButton(
                 onPressed: () {
-                 Get.to(() => PurchaseScreen());
+                 Get.to(() => PurchaseScreen(perdayAmount: widget.carPrice,));
                 },
                 child: Text("Purchase")),
             SizedBox(

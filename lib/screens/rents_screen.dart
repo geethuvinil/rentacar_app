@@ -136,7 +136,14 @@ class _RentsScreenState extends State<RentsScreen> {
             ),
             TextButton(
                 onPressed: () {
-                      Get.to(() => CarDetailsScreen());
+                      Get.to(() => CarDetailsScreen(
+                        carImage: imageName ?? "",
+                        carName: name ?? "",
+                        carModel: model ?? "",
+                        carColor: colorName ??"",
+                        carPrice: priceValue ?? "",
+                        carFuel: fuelType ?? "",
+                      ));
                 },
                 child: Text("More details"))
           ],
