@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class MyAccountScreen extends StatefulWidget {
-  const MyAccountScreen({super.key});
+  bool? isSellerAccount;
+   MyAccountScreen({this.isSellerAccount});
 
   @override
   State<MyAccountScreen> createState() => _MyAccountScreenState();
@@ -24,27 +25,27 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               
               accountDetailsTile(
                   title: "Name",
-                  subTitle: "Geethu Ajay",
+                  subTitle: widget.isSellerAccount! ? "Rental Services": "Geethu Ajay",
                   iconName: Icons.person_outline_sharp),
                   Divider(),
         accountDetailsTile(
                   title: "Phone Number",
-                  subTitle: "0091 9947720297",
+                  subTitle:  widget.isSellerAccount! ? "0091 9902730180": "0091 9947720297",
                   iconName: Icons.call),
                    Divider(),
         accountDetailsTile(
                   title: "Email Id",
-                  subTitle: "geethuajay@gmail.com",
+                  subTitle:  widget.isSellerAccount! ? "rentalservice12@gmail.com": "geethuajay@gmail.com",
                   iconName: Icons.email_sharp),
                    Divider(),
         accountDetailsTile(
                   title: "Address",
-                  subTitle: "xxxxxxxxxxx",
+                  subTitle:  widget.isSellerAccount! ? "Rental Services\nVypin,Kochi": "Skyline apartment\n Ernakulam",
                   iconName: Icons.location_on_sharp),
                    Divider(),
         accountDetailsTile(
                   title: "Password",
-                  subTitle: "000000",
+                  subTitle:  widget.isSellerAccount! ? "RentalSerice##12": "aabbcc",
                   iconName: Icons.password_sharp),
                    Divider(),
             ],

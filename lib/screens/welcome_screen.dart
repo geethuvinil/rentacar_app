@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rent_a_car/screens/main_screen.dart';
+import 'package:rent_a_car/screens/seller_side_home_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
@@ -35,7 +36,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         SizedBox(
           height: 20,
         ),
-      ElevatedButton(onPressed: (){}, child: Text("I am a Seller")),
+      ElevatedButton(onPressed: (){
+        Get.to(() => SellerSideHomeScreen());
+      }, child: Text("I am a Seller")),
       SizedBox(
           height: 20,
         ),
